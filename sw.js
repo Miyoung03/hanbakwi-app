@@ -1,5 +1,5 @@
-const CACHE='hangeol-singlefile-r142-20261021';
-const FILES=['./','./index.html','./manifest.webmanifest?v=20261021-r142-planlines','./icon-192.png?v=20261021-r142-planlines','./icon-180.png?v=20261021-r142-planlines','./icon-512.png?v=20261021-r142-planlines','./logo-hanbakwi-en.png?v=20261021-r142-planlines','./fonts/GangwonEdu_OTFLightA.woff2?v=20261021-r142-planlines','./fonts/GangwonEdu_OTFBoldA.woff2?v=20261021-r142-planlines'];
+const CACHE='hangeol-singlefile-r143-20261022';
+const FILES=['./','./index.html','./manifest.webmanifest?v=20261022-r143-carryover','./icon-192.png?v=20261022-r143-carryover','./icon-180.png?v=20261022-r143-carryover','./icon-512.png?v=20261022-r143-carryover','./logo-hanbakwi-en.png?v=20261022-r143-carryover','./fonts/GangwonEdu_OTFLightA.woff2?v=20261022-r143-carryover','./fonts/GangwonEdu_OTFBoldA.woff2?v=20261022-r143-carryover'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('hangeol-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==self.location.origin)return;e.respondWith(fetch(e.request).then(r=>{if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy))}return r}).catch(()=>caches.match(e.request))) });
